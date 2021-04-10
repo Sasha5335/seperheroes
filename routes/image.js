@@ -9,7 +9,7 @@ const upload = multer({ dest: path.resolve(__dirname, '../public/images') });
 
 imageRouter.post(
   '/add',
-  upload.single('image'),
+  upload.array('images'),
   imageController.addImgToSuperhero
 );
 

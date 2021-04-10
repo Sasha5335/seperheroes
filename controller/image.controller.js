@@ -3,14 +3,10 @@ const { Superhero, Image } = require('../models');
 
 module.exports.addImgToSuperhero = async (req, res, next) => {
   try {
-    const {
-      body,
-      file: { filename },
-    } = req;
+    const { body, files } = req;
 
-    const createdImg = await Image.create({
-      name: filename,
-      supersheroId: body.supersheroId,
+    files.forEach(({filename}) => {
+      const createdImg = await Image.bulkCreate({name: filename,supersheroId: body.supersheroId});
     });
 
     const superhero = await Superhero.findByPk(body.supersheroId, {

@@ -27,7 +27,7 @@ module.exports.getAllSuperpowers = async (req, res, next) => {
     });
 
     if (!superpowers.length) {
-      return next(createError(404, 'Users not found'));
+      return next(createError(404, 'Superpower not found'));
     }
 
     res.send({ data: superpowers });

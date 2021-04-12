@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const superheroController = require('../controller/superhero.controller');
 const paginate = require('../middlewares/paginate.mw');
+// const { checkSuperhero } = require('../middlewares/superhero.mw');
 
 const superheroRouter = Router();
 

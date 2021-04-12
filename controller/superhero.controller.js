@@ -1,9 +1,11 @@
+const createError = require('http-errors');
 const { Superhero } = require('../models');
 
 module.exports.createSuperhero = async (req, res, next) => {
   try {
     const { body } = req;
     const createdSuperhero = await Superhero.create(body);
+
     res.status(201).send(createdSuperhero);
   } catch (err) {
     next(err);
@@ -16,9 +18,13 @@ module.exports.getSuperhero = async (req, res, next) => {
       params: { id },
     } = req;
 
-    const superheroes = await Superhero.findByPk(id);
+    const superhero = await Superhero.findByPk(id);
 
-    res.status(200).send(superheroes);
+    if (!superhero) {
+      return next(createError(404, 'Superhero not found'));
+    }
+
+    res.status(200).send(superhero);
   } catch (err) {
     next(err);
   }
